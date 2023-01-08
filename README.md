@@ -8,8 +8,9 @@ Access to a Hadoop cluster
 Twitter API keys
 
 Oozie file structure:
--/user/oozie/myproject
-----/workflow.xml
+.
+├── /user/oozie/myproject
+│   ├── /workflow.xml
 ----/coordinator.xml
 ----/lib/
 --------/python-lib.zip  # Python libraries required by the MapReduce job
