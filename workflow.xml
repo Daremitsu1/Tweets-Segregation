@@ -46,3 +46,19 @@
                 </property>
             </configuration>
             <script>load_data.hql</script
+<action name="hive">
+        <hive xmlns="uri:oozie:hive-action:0.5">
+            ...
+            <script>load_data.hql</script>
+            <param>INPUT=${nameNode}/user/hadoop/tweets</param>
+            <param>OUTPUT=${nameNode}/user/hive/tweets</param>
+            <param>AFINN=${nameNode}/user/oozie/myproject/lib/afinn.txt</param>
+        </hive>
+        <ok to="end"/>
+        <error to="fail"/>
+    </action>
+    <kill name="fail">
+        <message>Workflow failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+    <end name="end"/>
+</workflow-app>
