@@ -1,0 +1,48 @@
+<workflow-app name="myproject" xmlns="uri:oozie:workflow:0.5">
+    <start to="flume"/>
+    <action name="flume">
+        <flume config="flume.conf"/>
+        <ok to="mapreduce"/>
+        <error to="fail"/>
+    </action>
+    <action name="mapreduce">
+        <map-reduce>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.mapper.class</name>
+                    <value>mapper.py</value>
+                </property>
+                <property>
+                    <name>mapred.reducer.class</name>
+                    <value>reducer.py</value>
+                </property>
+                <property>
+                    <name>mapred.input.dir</name>
+                    <value>/user/flume/tweets</value>
+                </property>
+                <property>
+                    <name>mapred.output.dir</name>
+                    <value>/user/hadoop/tweets</value>
+                </property>
+                <property>
+                    <name>mapred.cache.files</name>
+                    <value>/user/oozie/myproject/lib/python-lib.zip#python-lib.zip</value>
+                </property>
+            </configuration>
+        </map-reduce>
+        <ok to="hive"/>
+        <error to="fail"/>
+    </action>
+    <action name="hive">
+        <hive xmlns="uri:oozie:hive-action:0.5">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>oozie.hive.defaults</name>
+                    <value>hive-site.xml</value>
+                </property>
+            </configuration>
+            <script>load_data.hql</script
