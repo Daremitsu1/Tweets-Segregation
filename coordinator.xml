@@ -1,0 +1,23 @@
+<coordinator-app name="myproject-coordinator" xmlns="uri:oozie:coordinator:0.2" frequency="${coord:days(1)}" start="${startTime}" end="${endTime}" timezone="${timeZone}">
+    <action>
+        <workflow>
+            <app-path>${nameNode}/user/oozie/myproject</app-path>
+            <configuration>
+                <property>
+                    <name>startTime</name>
+                    <value>${startTime}</value>
+                </property>
+                <property>
+                    <name>endTime</name>
+                    <value>${endTime}</value>
+                </property>
+                <property>
+                    <name>timeZone</name>
+                    <value>${timeZone}</value>
+                </property>
+            </configuration>
+      </workflow>
+  </action>
+</coordinator-app>
+
+
