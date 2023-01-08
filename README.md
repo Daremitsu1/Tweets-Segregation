@@ -8,6 +8,10 @@ Access to a Hadoop cluster
 Twitter API keys
 
 Oozie file structure:
+
+.
+├── ...
+├── test
 .
 ├── /user/oozie/myproject
 │   ├── /workflow.xml
